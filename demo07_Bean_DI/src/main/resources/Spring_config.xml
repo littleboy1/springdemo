@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<bean id="teacher" class="com.lzq.spring.bean.Teacher">-->
+        <!--<property name="tName" value="Mr Liu"/>-->
+    <!--</bean>-->
+<!--
+    scope = "singleton" 这样的类会在spring容器启动时被创建，被创建保存在spring框架singletonList对象当中
+    每次用户调用getbean方法索要的时候，此时只会返回同一个实例对象
+    scope="prototype"不会在spring容易启动时创建，用户每次调用getbean的时候索要的时候返回全新的对象
+
+-->
+    <bean id="teacher" class="com.lzq.spring.bean.Teacher">
+        <property name="teacherName" value="mr li"/>
+        <property name="friendArray">
+            <array>
+                <value>mike</value>
+                <value>tom</value>
+                <value>allen</value>
+            </array>
+        </property>
+        <property name="school">
+            <list>
+                <value>北京大学</value>
+                <value>沈阳大学</value>
+            </list>
+        </property>
+    </bean>
+
+
+
+</beans>

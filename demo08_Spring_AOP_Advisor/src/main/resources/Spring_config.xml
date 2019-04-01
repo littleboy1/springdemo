@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <bean id="person" class="com.lzq.spring.service.Person"/>
+
+   <bean id="dog" class="com.lzq.spring.service.Dog"/>
+
+   <bean id="classFilter" class="com.lzq.spring.util.MyClassFilter"></bean>
+
+
+    <bean id="methodMatcher" class="com.lzq.spring.util.MyMethodMatcher"></bean>
+
+
+    <bean id="MyPointCut" class="com.lzq.spring.util.MyPointCut">
+       <property name="classFilter" ref="classFilter"/>
+       <property name="methodMatcher" ref="methodMatcher"/>
+   </bean>
+
+    <bean id="myAdvisor" class="com.lzq.spring.util.MyPointCutAdvisor">
+        <property name="advice" ref="before"/>
+        <property name="pointcut" ref="MyPointCut"/>
+    </bean>
+
+    <bean id="proxyPerson" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="person"/>
+        <property name="interceptorNames" value="myAdvisor" />
+    </bean>
+  <bean id="before" class="com.lzq.spring.service.MyBeforeAdvice"/>
+
+
+
+
+
+
+</beans>
