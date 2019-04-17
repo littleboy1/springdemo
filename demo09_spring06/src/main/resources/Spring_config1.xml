@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+   <!--<context:component-scan base-package="com.lzq"></context:component-scan>-->
+
+
+   <bean id="userService" class="com.lzq.service.impl.UserServiceImpl"/>
+
+   <bean id="myAdvice" class="com.lzq.advice.MyAdvice"/>
+
+   <aop:config>
+      <!--<aop:advisor advice-ref="myAdvice" pointcut="execution(void com.lzq.service.impl.UserServiceImpl.saveUser())">-->
+         <!---->
+      <!--</aop:advisor>-->
+      <aop:aspect ref="myAdvice">
+         <!--<aop:before method="log" pointcut="execution(void com.lzq.service.impl.UserServiceImpl.saveUser())"></aop:before>-->
+         <!--&lt;!&ndash;如果出现异常后置通知不在出现&ndash;&gt;-->
+         <!--<aop:after-returning method="log1" pointcut="execution(void com.lzq.service.impl.UserServiceImpl.saveUser())"></aop:after-returning>-->
+         <!--&lt;!&ndash;最终通知不管出不出错误都会执行&ndash;&gt;-->
+         <!--<aop:after method="log2" pointcut="execution(void com.lzq.service.impl.UserServiceImpl.saveUser())"></aop:after>-->
+         <!--&lt;!&ndash;如果出现异常执行&ndash;&gt;-->
+         <!--<aop:after-throwing method="log3" pointcut="execution(void com.lzq.service.impl.UserServiceImpl.saveUser())"></aop:after-throwing>-->
+         <aop:around method="log5"
+                     pointcut="execution(void *..*.*UserServiceImpl.*(..))"/>
+                     <!--pointcut="execution(void *..*())"/>-->
+                     <!--pointcut="execution(void com.lzq.service.impl.UserServiceImpl.saveUser())"/>-->
+      </aop:aspect>
+   </aop:config>
+
+</beans>
